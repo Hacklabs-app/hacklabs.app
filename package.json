@@ -36,6 +36,7 @@
     "@angular/cli": "^21.2.7",
     "@angular/compiler-cli": "^21.2.0",
     "@eslint/js": "^10.0.1",
+    "@ngx-env/builder": "^21.0.1",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",

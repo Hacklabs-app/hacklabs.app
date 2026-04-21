@@ -1,11 +1,16 @@
+// Polyfill process for the browser environment
+if (typeof window !== 'undefined' && !(window as any).process) {
+  (window as any).process = { env: {} };
+}
+
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: process.env['NG_APP_FIREBASE_API_KEY'] || '',
+    authDomain: process.env['NG_APP_FIREBASE_AUTH_DOMAIN'] || '',
+    projectId: process.env['NG_APP_FIREBASE_PROJECT_ID'] || '',
+    storageBucket: process.env['NG_APP_FIREBASE_STORAGE_BUCKET'] || '',
+    messagingSenderId: process.env['NG_APP_FIREBASE_MESSAGING_SENDER_ID'] || '',
+    appId: process.env['NG_APP_FIREBASE_APP_ID'] || ''
   }
 };

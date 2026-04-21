@@ -78,7 +78,7 @@ import { LucideAngularModule } from 'lucide-angular';
 
     .resources-title {
       margin: 0 0 0.7rem;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-size: clamp(2rem, 5vw, 2.8rem);
       line-height: 1.02;
       letter-spacing: -0.05em;
     }
@@ -117,9 +117,9 @@ import { LucideAngularModule } from 'lucide-angular';
 
     .resource-card {
       position: relative;
-      padding: 1.4rem;
+      padding: 1.25rem;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 1.35rem;
+      border-radius: 1.25rem;
       background: rgba(255, 255, 255, 0.03);
     }
 

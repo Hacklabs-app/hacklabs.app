@@ -76,7 +76,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
     .focus-title {
       margin: 0;
-      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-size: clamp(2rem, 5vw, 3rem);
       line-height: 1.05;
       letter-spacing: -0.05em;
     }
@@ -84,12 +84,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
     .focus-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.25rem;
+      gap: 1rem;
     }
 
     .focus-card {
-      min-height: 20rem;
-      padding: 2rem;
+      min-height: 16rem;
+      padding: 1.75rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;

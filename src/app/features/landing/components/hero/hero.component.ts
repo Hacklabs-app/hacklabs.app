@@ -58,7 +58,7 @@ import { gsap } from 'gsap';
 
     .hero-title {
       margin: 0 0 1.5rem;
-      font-size: clamp(3.5rem, 11vw, 8.5rem);
+      font-size: clamp(3rem, 10vw, 6.5rem);
       line-height: 0.92;
       font-weight: 900;
       letter-spacing: -0.06em;

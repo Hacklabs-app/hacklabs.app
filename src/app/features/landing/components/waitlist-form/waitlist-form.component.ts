@@ -17,9 +17,12 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
         </div>
 
         <div class="waitlist-card">
-          
           @if (isSuccess()) {
             <div class="waitlist-success" [class.is-returning]="isReturningUser()">
+               <button type="button" (click)="resetForm()" class="waitlist-success-close" aria-label="Close">
+                 &times;
+               </button>
+
                <h2 class="waitlist-success-title">
                  {{ isReturningUser() ? "Welcome back." : "You're in." }}
                </h2>
@@ -36,9 +39,8 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
                  </button>
                </div>
             </div>
-          }
-
-          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="waitlist-form">
+          } @else {
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="waitlist-form">
              <div class="waitlist-grid">
                 <div class="waitlist-field">
                   <label class="waitlist-label" for="name">Full Name</label>
@@ -128,6 +130,7 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
                <p class="waitlist-error">{{ error() }}</p>
              }
           </form>
+          }
         </div>
       </div>
     </section>
@@ -144,7 +147,7 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
     }
 
     .waitlist-shell {
-      width: min(100%, 46rem);
+      width: min(100%, 40rem);
       margin: 0 auto;
     }
 
@@ -179,7 +182,7 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
     .waitlist-card {
       position: relative;
       overflow: hidden;
-      padding: clamp(1.5rem, 4vw, 3rem);
+      padding: clamp(1.25rem, 3vw, 2.25rem);
       border: 1px solid rgba(255, 255, 255, 0.09);
       border-radius: 1.8rem;
       background:
@@ -350,39 +353,55 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
     }
 
     .waitlist-success {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 1.25rem;
-      padding: 2.5rem;
+      padding: 1rem 0.5rem;
       text-align: center;
-      background: linear-gradient(180deg, #00b199, #76f0da);
-      color: #041212;
+      color: #fff;
     }
 
-    .waitlist-success.is-returning {
-      background: linear-gradient(180deg, #101414, #041212);
+    .waitlist-success-close {
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+      width: 2.2rem;
+      height: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      color: #8c9699;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .waitlist-success-close:hover {
+      background: rgba(255, 255, 255, 0.1);
       color: #fff;
-      border: 2px solid var(--color-brand-primary);
     }
 
     .waitlist-success-title {
       margin: 0;
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
       text-transform: uppercase;
       letter-spacing: -0.04em;
+      color: var(--color-brand-primary);
     }
 
     .waitlist-success-copy {
       margin: 0;
       font-family: var(--font-mono);
-      font-weight: 600;
+      font-weight: 500;
       max-width: 28rem;
       line-height: 1.6;
+      color: #a8b0b2;
     }
 
     .waitlist-success-share {
@@ -396,28 +415,31 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
     .waitlist-success-share p {
       margin: 0;
       font-family: var(--font-mono);
-      font-size: 0.82rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      opacity: 0.8;
+      letter-spacing: 0.18em;
+      color: #6e777a;
     }
 
     .waitlist-share-btn {
-      min-height: 3rem;
-      padding: 0 1.5rem;
-      border: 1px solid rgba(4, 18, 18, 0.2);
+      min-height: 3.2rem;
+      padding: 0 2rem;
+      border: 1px solid rgba(0, 177, 153, 0.3);
       border-radius: 999px;
-      background: rgba(4, 18, 18, 0.1);
-      color: #041212;
+      background: rgba(0, 177, 153, 0.08);
+      color: var(--color-brand-primary);
       font-family: var(--font-mono);
       font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .waitlist-success.is-returning .waitlist-share-btn {
+    .waitlist-share-btn:hover {
+      background: rgba(0, 177, 153, 0.15);
       border-color: var(--color-brand-primary);
-      background: rgba(0, 177, 153, 0.1);
-      color: var(--color-brand-primary);
+      transform: translateY(-1px);
     }
 
     .waitlist-error {
@@ -478,6 +500,17 @@ export class WaitlistFormComponent {
     navigator.clipboard.writeText('https://hacklabs.app');
     this.copyText.set('Copied!');
     setTimeout(() => this.copyText.set('Copy Link'), 2000);
+  }
+
+  resetForm() {
+    this.isSuccess.set(false);
+    this.isReturningUser.set(false);
+    this.form.reset({
+      experience: 'Intermediate',
+      tos: false
+    });
+    this.selectedTracks.set([]);
+    this.error.set(null);
   }
 
   async onSubmit() {
