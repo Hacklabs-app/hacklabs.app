@@ -514,10 +514,7 @@ export class WaitlistFormComponent {
   }
 
   async onSubmit() {
-    console.log('[WaitlistForm] Form submitted. Valid:', this.form.valid, 'Tracks selected:', this.selectedTracks().length);
-    
     if (this.form.invalid || this.selectedTracks().length === 0) {
-      console.warn('[WaitlistForm] Validation failed');
       this.error.set('Please complete the form and choose at least one focus area.');
       return;
     }
@@ -526,20 +523,16 @@ export class WaitlistFormComponent {
     this.isLoading.set(true);
 
     const formValue = this.form.getRawValue();
-    console.log('[WaitlistForm] Data:', formValue);
 
     try {
-      console.log('[WaitlistForm] Checking existence...');
       const exists = await this.waitlistService.checkExists(formValue.email);
       
       if (exists) {
-        console.log('[WaitlistForm] User already on list');
         this.isReturningUser.set(true);
         this.isSuccess.set(true);
         return;
       }
 
-      console.log('[WaitlistForm] Proceeding with submission...');
       await this.waitlistService.submitWaitlist({
         name: formValue.name,
         email: formValue.email,
@@ -550,7 +543,6 @@ export class WaitlistFormComponent {
         tos: formValue.tos ?? false
       });
       
-      console.log('[WaitlistForm] Success');
       this.isReturningUser.set(false);
       this.isSuccess.set(true);
     } catch {
