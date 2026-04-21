@@ -52,10 +52,10 @@ This repo includes both code and website messaging. For content-heavy changes:
 
 ## Secrets And Config
 
-- Never commit real secrets
-- Never commit production credentials
-- Keep local-only config out of Git
-- Use tracked example files only for safe placeholders
+- Never commit real secrets or production credentials
+- Keep local configuration in a `.env` file (which is git-ignored)
+- All browser-accessible variables must be prefixed with `NG_APP_`
+- Use `.env.example` only for safe placeholders
 
 ## Pull Request Guidance
 
