@@ -15,7 +15,6 @@ import { NgOptimizedImage } from '@angular/common';
         <div class="footer-links">
           <a href="https://github.com/hacklabs-app" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://github.com/orgs/Hacklabs-app/discussions" target="_blank" rel="noreferrer">Discussions</a>
-          <a href="https://hacklabs.app">Waitlist</a>
         </div>
       </div>
     </footer>
@@ -28,7 +27,7 @@ import { NgOptimizedImage } from '@angular/common';
 
     .footer-shell {
       width: 100%;
-      padding: 0.75rem 1.5rem 1.5rem;
+      padding: 0.25rem 1.5rem 6rem;
     }
 
     .footer-inner {
@@ -37,12 +36,8 @@ import { NgOptimizedImage } from '@angular/common';
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 1.5rem;
-      background: rgba(10, 12, 12, 0.82);
-      backdrop-filter: blur(16px);
+      gap: 1.5rem;
+      padding: 0;
     }
 
     .footer-brand {
@@ -53,22 +48,24 @@ import { NgOptimizedImage } from '@angular/common';
 
     .footer-logo {
       width: auto;
-      height: 4.75rem;
+      height: 16rem;
       max-width: none;
-      opacity: 0.92;
+      opacity: 0.95;
     }
 
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     .footer-links a {
-      color: #9ca5a8;
+      color: #7c8689;
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .footer-links a:hover {
@@ -78,12 +75,13 @@ import { NgOptimizedImage } from '@angular/common';
     @media (max-width: 48rem) {
       .footer-inner {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
       }
 
       .footer-logo {
-        height: 4rem;
+        height: 8rem;
       }
     }
   `]
