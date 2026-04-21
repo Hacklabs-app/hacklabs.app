@@ -64,9 +64,12 @@ This repository is set up for contribution from members inside the organization.
 - `main` is protected
 - Changes should be made through branches and pull requests
 
-Start here:
+### Contributors
 
-- Read [CONTRIBUTING.md](./CONTRIBUTING.md)
+<a href="https://github.com/Hacklabs-app/hacklabs.app/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Hacklabs-app/hacklabs.app" />
+</a>
+
 
 ## Notes
 
