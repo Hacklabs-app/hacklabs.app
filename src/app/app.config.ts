@@ -26,14 +26,14 @@ export const appConfig: ApplicationConfig = {
       if (isPlatformBrowser(platformId)) {
         return initializeApp(environment.firebase);
       }
-      return null as any;
+      return null as never;
     }),
     provideFirestore(() => {
       const platformId = inject(PLATFORM_ID);
       if (isPlatformBrowser(platformId)) {
         return getFirestore();
       }
-      return null as any;
+      return null as never;
     })
   ]
 };
