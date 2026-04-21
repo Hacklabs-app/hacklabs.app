@@ -1,11 +1,11 @@
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCU9zvsvH-m1eGvmH6dRDJBBAgpemWNkic",
+    authDomain: "hacklabshq.firebaseapp.com",
+    projectId: "hacklabshq",
+    storageBucket: "hacklabshq.firebasestorage.app",
+    messagingSenderId: "915102215140",
+    appId: "1:915102215140:web:dbbea70bdb3cd4b6f435f1"
   }
 };
