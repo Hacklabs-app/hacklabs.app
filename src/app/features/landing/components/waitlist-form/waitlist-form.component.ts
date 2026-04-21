@@ -64,8 +64,8 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
              </div>
 
              <div class="waitlist-field">
-                <label class="waitlist-label">Experience Tier</label>
-                <div class="waitlist-chips">
+                <span class="waitlist-label" id="experience-label">Experience Tier</span>
+                <div class="waitlist-chips" role="radiogroup" aria-labelledby="experience-label">
                   @for (level of experienceLevels; track level) {
                     <button type="button" (click)="form.get('experience')?.setValue(level)"
                             [class.is-active]="form.get('experience')?.value === level"
@@ -77,8 +77,8 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
              </div>
 
              <div class="waitlist-field">
-                <label class="waitlist-label">What do you most want help with?</label>
-                <div class="waitlist-chips">
+                <span class="waitlist-label" id="tracks-label">What do you most want help with?</span>
+                <div class="waitlist-chips" role="group" aria-labelledby="tracks-label">
                   @for (track of learningTracks; track track) {
                     <button
                       type="button"
@@ -92,8 +92,8 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
              </div>
 
              <div class="waitlist-field">
-                <label class="waitlist-label">Availability</label>
-                <div class="waitlist-chips">
+                <span class="waitlist-label" id="availability-label">Availability</span>
+                <div class="waitlist-chips" role="radiogroup" aria-labelledby="availability-label">
                   @for (slot of availabilityOptions; track slot) {
                     <button
                       type="button"
@@ -448,7 +448,7 @@ export class WaitlistFormComponent {
         tos: formValue.tos ?? false
       });
       this.isSuccess.set(true);
-    } catch (e) {
+    } catch {
       this.error.set('Submission failed. Please try again.');
     } finally {
       this.isLoading.set(false);

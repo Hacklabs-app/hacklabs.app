@@ -33,11 +33,13 @@ Use clear branch names, for example:
 Before opening a PR, run:
 
 ```bash
-pnpm exec tsc -p tsconfig.app.json --noEmit
+pnpm lint
 pnpm build
 ```
 
-If your change is small and `pnpm build` is too heavy for the moment, at minimum ensure the relevant area works locally.
+CI runs both of these as status checks on every pull request. The PR cannot merge unless they pass.
+
+If your change is small and `pnpm build` is too heavy for the moment, at minimum run `pnpm lint` and ensure the relevant area works locally.
 
 ## Content Changes
 

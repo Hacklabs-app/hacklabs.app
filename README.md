@@ -45,6 +45,7 @@ The dev server runs at `http://localhost:4200`.
 
 - `pnpm start` - run the local dev server
 - `pnpm build` - create a production build
+- `pnpm lint` - run ESLint checks
 - `pnpm watch` - build continuously in development mode
 - `pnpm test` - run tests
 
