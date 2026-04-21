@@ -19,9 +19,22 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
         <div class="waitlist-card">
           
           @if (isSuccess()) {
-            <div class="waitlist-success">
-               <h2 class="waitlist-success-title">You're in.</h2>
-               <p class="waitlist-success-copy">We’ll use this to shape invites, Slack onboarding, and early updates.</p>
+            <div class="waitlist-success" [class.is-returning]="isReturningUser()">
+               <h2 class="waitlist-success-title">
+                 {{ isReturningUser() ? "Welcome back." : "You're in." }}
+               </h2>
+               <p class="waitlist-success-copy">
+                 {{ isReturningUser() 
+                    ? "You're already on the waitlist! We can't wait to have you." 
+                    : "Congrats! You'll get a Slack invite and onboarding details soon." }}
+               </p>
+               
+               <div class="waitlist-success-share">
+                 <p>Invite a friend to the run:</p>
+                 <button type="button" (click)="copyLink()" class="waitlist-share-btn">
+                   {{ copyText() }}
+                 </button>
+               </div>
             </div>
           }
 
@@ -36,7 +49,10 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
                 </div>
 
                 <div class="waitlist-field">
-                  <label class="waitlist-label" for="email">Email Address</label>
+                  <label class="waitlist-label" for="email">
+                    Email Address
+                    <span class="waitlist-label-hint">(Use primary or personal)</span>
+                  </label>
                   <input type="email" formControlName="email" 
                          id="email"
                          class="waitlist-input"
@@ -44,23 +60,12 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
                 </div>
              </div>
 
-             <div class="waitlist-grid">
-                <div class="waitlist-field">
-                  <label class="waitlist-label" for="phone">Phone / WhatsApp</label>
-                  <input type="tel" formControlName="phone"
-                         id="phone"
-                         class="waitlist-input"
-                         placeholder="+254...">
-                </div>
-
-                <div class="waitlist-field">
-                  <label class="waitlist-label" for="currentStage">Current Stage</label>
-                  <select formControlName="currentStage" id="currentStage" class="waitlist-input waitlist-select">
-                    @for (stage of currentStages; track stage) {
-                      <option [value]="stage">{{ stage }}</option>
-                    }
-                  </select>
-                </div>
+             <div class="waitlist-field">
+                <label class="waitlist-label" for="phone">Phone / WhatsApp</label>
+                <input type="tel" formControlName="phone"
+                       id="phone"
+                       class="waitlist-input"
+                       placeholder="+254...">
              </div>
 
              <div class="waitlist-field">
@@ -77,7 +82,7 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
              </div>
 
              <div class="waitlist-field">
-                <span class="waitlist-label" id="tracks-label">What do you most want help with?</span>
+                <span class="waitlist-label" id="tracks-label">Which pillar do you want help with?</span>
                 <div class="waitlist-chips" role="group" aria-labelledby="tracks-label">
                   @for (track of learningTracks; track track) {
                     <button
@@ -92,22 +97,10 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
              </div>
 
              <div class="waitlist-field">
-                <span class="waitlist-label" id="availability-label">Availability</span>
-                <div class="waitlist-chips" role="radiogroup" aria-labelledby="availability-label">
-                  @for (slot of availabilityOptions; track slot) {
-                    <button
-                      type="button"
-                      (click)="form.get('availability')?.setValue(slot)"
-                      [class.is-active]="form.get('availability')?.value === slot"
-                      class="waitlist-chip">
-                      {{ slot }}
-                    </button>
-                  }
-                </div>
-             </div>
-
-             <div class="waitlist-field">
-                <label class="waitlist-label" for="reason">What are you trying to become better at?</label>
+                <label class="waitlist-label" for="reason">
+                  What are you trying to become better at?
+                  <span class="waitlist-label-optional">(Optional)</span>
+                </label>
                 <textarea
                   id="reason"
                   formControlName="reason"
@@ -118,7 +111,7 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
              <div class="waitlist-consent">
                 <input type="checkbox" formControlName="tos" id="tos" class="waitlist-checkbox">
                 <label for="tos" class="waitlist-consent-copy">
-                  I understand this is structured, accountability-driven, and communication may happen through email, Slack, and GitHub Discussions.
+                  I understand this is structured and intense, and I am ready to commit at most 10hrs a week to sessions and building.
                 </label>
              </div>
 
@@ -218,6 +211,23 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
       font-size: 0.72rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
+    }
+
+    .waitlist-label-optional {
+      opacity: 0.5;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.65rem;
+      margin-left: 0.5rem;
+    }
+
+    .waitlist-label-hint {
+      opacity: 0.6;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.65rem;
+      margin-left: 0.4rem;
+      color: var(--color-brand-primary);
     }
 
     .waitlist-input {
@@ -343,19 +353,26 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
       position: absolute;
       inset: 0;
       z-index: 2;
-      display: grid;
-      place-items: center;
-      align-content: center;
-      gap: 0.75rem;
-      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 2.5rem;
       text-align: center;
       background: linear-gradient(180deg, #00b199, #76f0da);
       color: #041212;
     }
 
+    .waitlist-success.is-returning {
+      background: linear-gradient(180deg, #101414, #041212);
+      color: #fff;
+      border: 2px solid var(--color-brand-primary);
+    }
+
     .waitlist-success-title {
       margin: 0;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
       text-transform: uppercase;
       letter-spacing: -0.04em;
     }
@@ -364,6 +381,43 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
       margin: 0;
       font-family: var(--font-mono);
       font-weight: 600;
+      max-width: 28rem;
+      line-height: 1.6;
+    }
+
+    .waitlist-success-share {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .waitlist-success-share p {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+    }
+
+    .waitlist-share-btn {
+      min-height: 3rem;
+      padding: 0 1.5rem;
+      border: 1px solid rgba(4, 18, 18, 0.2);
+      border-radius: 999px;
+      background: rgba(4, 18, 18, 0.1);
+      color: #041212;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .waitlist-success.is-returning .waitlist-share-btn {
+      border-color: var(--color-brand-primary);
+      background: rgba(0, 177, 153, 0.1);
+      color: var(--color-brand-primary);
     }
 
     .waitlist-error {
@@ -390,29 +444,25 @@ import { WaitlistService } from '../../../../core/services/waitlist.service';
 export class WaitlistFormComponent {
   private fb = inject(FormBuilder);
   private waitlistService = inject(WaitlistService);
-  readonly currentStages = ['Student', 'Beginner', 'Self-Taught Builder', 'Working Professional'] as const;
   readonly experienceLevels = ['Beginner', 'Intermediate', 'Advanced'] as const;
   readonly learningTracks = [
-    'Backend & APIs',
-    'Deployment & DevOps',
-    'Systems & Linux',
-    'Team workflow',
-    'AI with fundamentals'
+    'AI/ML',
+    'IoT & Robotics',
+    'Backend & DevOps'
   ] as const;
-  readonly availabilityOptions = ['Daily', '3-4 Times / Week', 'Weekends Only'] as const;
   readonly selectedTracks = signal<string[]>([]);
   readonly isLoading = signal(false);
   readonly isSuccess = signal(false);
+  readonly isReturningUser = signal(false);
+  readonly copyText = signal('Copy Link');
   readonly error = signal<string | null>(null);
 
   form = this.fb.group({
     name: this.fb.nonNullable.control('', [Validators.required]),
     email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
     phone: this.fb.nonNullable.control('', [Validators.required]),
-    currentStage: this.fb.nonNullable.control<'Student' | 'Beginner' | 'Self-Taught Builder' | 'Working Professional'>('Student'),
     experience: this.fb.nonNullable.control<'Beginner' | 'Intermediate' | 'Advanced'>('Intermediate'),
-    availability: this.fb.nonNullable.control<'Daily' | '3-4 Times / Week' | 'Weekends Only'>('Daily'),
-    reason: this.fb.nonNullable.control('', [Validators.required, Validators.minLength(30)]),
+    reason: this.fb.nonNullable.control(''),
     tos: [false, [Validators.requiredTrue]]
   });
 
@@ -424,8 +474,17 @@ export class WaitlistFormComponent {
     );
   }
 
+  copyLink() {
+    navigator.clipboard.writeText('https://hacklabs.app');
+    this.copyText.set('Copied!');
+    setTimeout(() => this.copyText.set('Copy Link'), 2000);
+  }
+
   async onSubmit() {
+    console.log('[WaitlistForm] Form submitted. Valid:', this.form.valid, 'Tracks selected:', this.selectedTracks().length);
+    
     if (this.form.invalid || this.selectedTracks().length === 0) {
+      console.warn('[WaitlistForm] Validation failed');
       this.error.set('Please complete the form and choose at least one focus area.');
       return;
     }
@@ -434,22 +493,35 @@ export class WaitlistFormComponent {
     this.isLoading.set(true);
 
     const formValue = this.form.getRawValue();
+    console.log('[WaitlistForm] Data:', formValue);
 
     try {
+      console.log('[WaitlistForm] Checking existence...');
+      const exists = await this.waitlistService.checkExists(formValue.email);
+      
+      if (exists) {
+        console.log('[WaitlistForm] User already on list');
+        this.isReturningUser.set(true);
+        this.isSuccess.set(true);
+        return;
+      }
+
+      console.log('[WaitlistForm] Proceeding with submission...');
       await this.waitlistService.submitWaitlist({
         name: formValue.name,
         email: formValue.email,
         phone: formValue.phone,
-        currentStage: formValue.currentStage,
         experience: formValue.experience,
         fields: this.selectedTracks(),
-        availability: formValue.availability,
         reason: formValue.reason,
         tos: formValue.tos ?? false
       });
+      
+      console.log('[WaitlistForm] Success');
+      this.isReturningUser.set(false);
       this.isSuccess.set(true);
     } catch {
-      this.error.set('Submission failed. Please try again.');
+      this.error.set('Submission failed. Please check your connection.');
     } finally {
       this.isLoading.set(false);
     }
