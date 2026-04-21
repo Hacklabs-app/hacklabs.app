@@ -44,6 +44,8 @@ jobs:
 
       - run: pnpm build
 
+      - run: mv dist/hacklabs-app/browser/index.csr.html dist/hacklabs-app/browser/index.html
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
