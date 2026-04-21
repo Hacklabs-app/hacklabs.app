@@ -28,10 +28,11 @@ This repo contains the Angular app for the Hacklabs landing experience, interest
 pnpm install
 ```
 
-2. Add Firebase environment values:
+2. Configure environment variables:
 
-- `src/environments/environment.ts`
-- `src/environments/environment.prod.ts`
+- Copy the example file: `cp .env.example .env`
+- Open `.env` and add your Firebase credentials.
+- **Note:** All browser-accessible variables must be prefixed with `NG_APP_` (e.g., `NG_APP_FIREBASE_API_KEY`).
 
 3. Start the app:
 
@@ -74,7 +75,7 @@ This repository is set up for contribution from members inside the organization.
 
 ## Notes
 
-- Do not commit real environment secrets
+- Do not commit real environment secrets (the `.env` file is git-ignored)
 - Use `.env.example` only for safe example values
 - If Firebase configuration changes, keep `firestore.rules` in sync with the app behavior
 

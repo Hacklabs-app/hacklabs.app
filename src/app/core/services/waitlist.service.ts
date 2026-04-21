@@ -6,30 +6,28 @@ import { Firestore, doc, getDoc, setDoc, serverTimestamp } from '@angular/fire/f
   providedIn: 'root'
 })
 export class WaitlistService {
-  private readonly firestore = inject(Firestore);
+  private readonly firestore = inject(Firestore, { optional: true });
   private readonly platformId = inject(PLATFORM_ID);
 
   async checkExists(email: string): Promise<boolean> {
-    if (!isPlatformBrowser(this.platformId)) return false;
+    if (!isPlatformBrowser(this.platformId) || !this.firestore) return false;
 
     const emailId = email.toLowerCase().trim();
-    console.log('[WaitlistService] Checking if user exists:', emailId);
     
     try {
       const docRef = doc(this.firestore, 'waitlist', emailId);
       const docSnap = await getDoc(docRef);
       return docSnap.exists();
     } catch (error) {
-      console.error('[WaitlistService] checkExists error details:', error);
+      console.error('[WaitlistService] checkExists error:', error);
       throw error;
     }
   }
 
   async submitWaitlist(data: Record<string, unknown> & { email: string }) {
-    if (!isPlatformBrowser(this.platformId)) return;
+    if (!isPlatformBrowser(this.platformId) || !this.firestore) return;
 
     const emailId = data.email.toLowerCase().trim();
-    console.log('[WaitlistService] Submitting for ID:', emailId);
     
     try {
       const docRef = doc(this.firestore, 'waitlist', emailId);
@@ -39,9 +37,8 @@ export class WaitlistService {
         status: 'pending',
         createdAt: serverTimestamp()
       });
-      console.log('[WaitlistService] Submission successful');
     } catch (error) {
-      console.error('[WaitlistService] Submission error details:', error);
+      console.error('[WaitlistService] Submission error:', error);
       throw error;
     }
   }
