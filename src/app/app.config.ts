@@ -5,7 +5,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 
 import { LucideAngularModule, Menu, X, Server, Cpu, BrainCircuit, Cloud, Users, ShieldCheck, Play, Github, MessageSquare, ArrowRight } from 'lucide-angular';
 

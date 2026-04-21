@@ -9,7 +9,7 @@ import { NgOptimizedImage } from '@angular/common';
     <footer class="footer-shell">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img ngSrc="assets/logo.svg" width="640" height="160" alt="Hacklabs" class="footer-logo">
+          <img ngSrc="assets/logo.svg" width="1024" height="768" alt="Hacklabs" class="footer-logo">
         </div>
         
         <div class="footer-links">
@@ -27,7 +27,7 @@ import { NgOptimizedImage } from '@angular/common';
 
     .footer-shell {
       width: 100%;
-      padding: 0.25rem 1.5rem 6rem;
+      padding: 0.25rem 1.5rem 0;
     }
 
     .footer-inner {
@@ -36,7 +36,7 @@ import { NgOptimizedImage } from '@angular/common';
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1.5rem;
+      gap: 0.5rem;
       padding: 0;
     }
 
@@ -51,12 +51,13 @@ import { NgOptimizedImage } from '@angular/common';
       height: 16rem;
       max-width: none;
       opacity: 0.95;
+      margin-bottom: -1.5rem;
     }
 
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .footer-links a {
@@ -77,11 +78,12 @@ import { NgOptimizedImage } from '@angular/common';
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 1.5rem;
+        gap: 0;
       }
 
       .footer-logo {
-        height: 8rem;
+        height: 12rem;
+        margin-bottom: -1rem;
       }
     }
   `]

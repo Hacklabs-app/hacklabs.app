@@ -22,7 +22,7 @@ import { NgOptimizedImage } from '@angular/common';
             class="launch-logo-card launch-logo-link"
             href="/"
             aria-label="Visit Hacklabs home">
-            <img ngSrc="assets/logo.svg" width="720" height="180" alt="Hacklabs" class="launch-logo launch-logo-hacklabs">
+            <img ngSrc="assets/logo.svg" width="1024" height="768" alt="Hacklabs" class="launch-logo launch-logo-hacklabs">
           </a>
           <a
             class="launch-logo-card launch-logo-link"
@@ -30,7 +30,7 @@ import { NgOptimizedImage } from '@angular/common';
             target="_blank"
             rel="noreferrer"
             aria-label="Visit GDG on Campus University of Embu">
-            <img ngSrc="assets/gdg.png" width="960" height="320" alt="Google Developer Groups on Campus University of Embu" class="launch-logo launch-logo-gdg">
+            <img ngSrc="assets/gdg.png" width="192" height="192" alt="Google Developer Groups on Campus University of Embu" class="launch-logo launch-logo-gdg">
           </a>
         </div>
       </div>
