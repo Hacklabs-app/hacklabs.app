@@ -25,7 +25,7 @@ export class WaitlistService {
     }
   }
 
-  async submitWaitlist(data: any) {
+  async submitWaitlist(data: Record<string, unknown> & { email: string }) {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const emailId = data.email.toLowerCase().trim();

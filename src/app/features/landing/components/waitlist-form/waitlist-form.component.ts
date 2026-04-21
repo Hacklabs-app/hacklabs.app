@@ -520,8 +520,7 @@ export class WaitlistFormComponent {
       console.log('[WaitlistForm] Success');
       this.isReturningUser.set(false);
       this.isSuccess.set(true);
-    } catch (e) {
-      console.error('[WaitlistForm] Caught error:', e);
+    } catch {
       this.error.set('Submission failed. Please check your connection.');
     } finally {
       this.isLoading.set(false);
