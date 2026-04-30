@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-resources',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [LucideAngularModule],
   template: `
     <section id="resources" class="resources-section">
@@ -28,7 +29,11 @@ import { LucideAngularModule } from 'lucide-angular';
               <p class="resource-label">{{ resource.label }}</p>
               <h3 class="resource-title">{{ resource.title }}</h3>
               <p class="resource-copy">{{ resource.copy }}</p>
-              <a class="resource-link" [href]="resource.href" [target]="resource.external ? '_blank' : null" [rel]="resource.external ? 'noreferrer' : null">
+              <a class="resource-link"
+                 [href]="resource.href"
+                 [target]="resource.external ? '_blank' : null"
+                 [rel]="resource.external ? 'noreferrer' : null"
+                 [attr.aria-label]="resource.cta + ': ' + resource.title">
                 {{ resource.cta }}
               </a>
             </article>
