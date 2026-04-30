@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-resources',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [LucideAngularModule],
   template: `
     <section id="resources" class="resources-section">
@@ -29,7 +29,11 @@ import { LucideAngularModule } from 'lucide-angular';
               <p class="resource-label">{{ resource.label }}</p>
               <h3 class="resource-title">{{ resource.title }}</h3>
               <p class="resource-copy">{{ resource.copy }}</p>
-              <a class="resource-link" [href]="resource.href" [target]="resource.external ? '_blank' : null" [rel]="resource.external ? 'noreferrer' : null">
+              <a class="resource-link"
+                 [href]="resource.href"
+                 [target]="resource.external ? '_blank' : null"
+                 [rel]="resource.external ? 'noreferrer' : null"
+                 [attr.aria-label]="resource.cta + ': ' + resource.title">
                 {{ resource.cta }}
               </a>
             </article>
@@ -181,15 +185,6 @@ import { LucideAngularModule } from 'lucide-angular';
         0 12px 24px -18px rgba(0, 177, 153, 0.45);
     }
 
-    .resource-icon.join {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(0, 177, 153, 0.18));
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.14);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.07),
-        0 12px 24px -18px rgba(0, 177, 153, 0.4);
-    }
-
     .resource-label {
       margin: 0 0 0.65rem;
       color: var(--color-brand-primary);
@@ -274,14 +269,14 @@ export class ResourcesComponent {
       external: true
     },
     {
-      label: 'Get Started',
-      icon: 'arrow-right',
-      iconClass: 'join',
-      title: 'Join the first run',
-      copy: 'Use the form below to join us, tell us your focus area, and help us shape the opening cohort.',
-      href: '#join',
-      cta: 'Go to Join Us',
-      external: false
+      label: 'GitHub',
+      icon: 'github',
+      iconClass: 'github',
+      title: 'Follow the build on GitHub',
+      copy: 'Repos, updates, and work-in-progress from the program live here. No sign-up required.',
+      href: 'https://github.com/hacklabs-app',
+      cta: 'Open GitHub',
+      external: true
     }
   ] as const;
 }

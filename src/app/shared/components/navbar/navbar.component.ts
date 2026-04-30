@@ -1,25 +1,25 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, LucideAngularModule, NgOptimizedImage],
+  imports: [LucideAngularModule, NgOptimizedImage],
   host: {
     '(window:scroll)': 'onScroll()'
   },
   template: `
     <nav class="nav-shell" [class.is-scrolled]="isScrolled()">
       <div class="nav-inner">
-        
         <a href="/" class="nav-brand" aria-label="Hacklabs home">
           <img ngSrc="assets/logo.svg" width="1024" height="768" priority alt="Hacklabs" class="nav-logo">
         </a>
-
         <div class="nav-links">
           <a href="#resources" class="nav-link-desktop">Resources</a>
-          <a href="#join" class="nav-link-cta">Join Us</a>
+          <a href="https://www.youtube.com/@gdgembu"
+             target="_blank"
+             rel="noreferrer"
+             class="nav-link-watch">Watch</a>
         </div>
       </div>
     </nav>
@@ -102,26 +102,26 @@ import { LucideAngularModule } from 'lucide-angular';
       color: #fff;
     }
 
-    .nav-links a.nav-link-cta {
+    .nav-links a.nav-link-watch {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 2.6rem;
-      padding: 0.65rem 1rem;
+      padding: 0.65rem 1.1rem;
       border-radius: 999px;
-      border: 1px solid rgba(0, 177, 153, 0.2);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(0, 177, 153, 0.78));
-      color: #000000 !important;
-      font-weight: 800;
+      border: 1px solid rgba(0, 177, 153, 0.45);
+      background: transparent;
+      color: var(--color-brand-primary);
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      box-shadow: 0 16px 30px -24px rgba(0, 177, 153, 0.8);
-      text-shadow: none;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
     }
 
-    .nav-links a.nav-link-cta:hover {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(0, 177, 153, 0.95));
-      color: #000000 !important;
+    .nav-links a.nav-link-watch:hover {
+      border-color: var(--color-brand-primary);
+      background: rgba(0, 177, 153, 0.1);
+      color: #f4fffe;
     }
 
     @media (max-width: 48rem) {
@@ -132,7 +132,7 @@ import { LucideAngularModule } from 'lucide-angular';
       .nav-shell.is-scrolled {
         transform: translateY(-0.6rem);
       }
-      
+
       .nav-inner {
         min-height: 4rem;
         padding: 0.6rem 0.8rem;
