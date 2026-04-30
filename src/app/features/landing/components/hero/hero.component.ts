@@ -1,10 +1,10 @@
-import { Component, AfterViewInit, ElementRef, ViewChild, inject, PLATFORM_ID } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, ElementRef, ViewChild, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-hero',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="hero-section">
       <div class="hero-orb hero-orb-primary" aria-hidden="true"></div>
@@ -14,7 +14,7 @@ import { gsap } from 'gsap';
           BACK TO<br/>
           <span class="hero-title-accent glow-text">BASICS.</span>
         </h1>
-        
+
         <p class="hero-copy">
           Build with AI if you want, but know what your code is doing.
           Learn the fundamentals behind backends, deployment, traffic, collaboration, and shipping in the real world.
@@ -24,6 +24,23 @@ import { gsap } from 'gsap';
           <span>AI</span>
           <span>IoT</span>
           <span>Backend & DevOps</span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="https://www.youtube.com/@gdgembu"
+             target="_blank"
+             rel="noreferrer"
+             class="hero-cta-chip"
+             aria-label="Watch on YouTube (opens in new tab)">
+            <span aria-hidden="true">▶</span> Watch on YouTube
+          </a>
+          <a href="https://github.com/hacklabs-app"
+             target="_blank"
+             rel="noreferrer"
+             class="hero-cta-chip"
+             aria-label="Hacklabs on GitHub (opens in new tab)">
+            <span aria-hidden="true">★</span> GitHub
+          </a>
         </div>
       </div>
     </section>
@@ -85,7 +102,7 @@ import { gsap } from 'gsap';
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.75rem;
-      margin: 0 0 1rem;
+      margin: 0 0 1.5rem;
     }
 
     .hero-proof span {
@@ -98,6 +115,37 @@ import { gsap } from 'gsap';
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .hero-cta-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 177, 153, 0.35);
+      background: rgba(0, 177, 153, 0.06);
+      color: var(--color-brand-primary);
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .hero-cta-chip:hover {
+      border-color: var(--color-brand-primary);
+      background: rgba(0, 177, 153, 0.14);
+      color: #f4fffe;
+      transform: translateY(-2px);
     }
 
     .hero-orb {
@@ -146,7 +194,8 @@ export class HeroComponent implements AfterViewInit {
 
       tl.from(el.querySelector('h1'), { y: 40, opacity: 0, duration: 1, ease: 'power4.out' })
         .from(el.querySelector('p'), { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-        .from(el.querySelector('.hero-proof'), { y: 20, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.45');
+        .from(el.querySelector('.hero-proof'), { y: 20, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.45')
+        .from(el.querySelector('.hero-cta'), { y: 20, opacity: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3');
     }
   }
 }

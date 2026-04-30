@@ -3,16 +3,15 @@ import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-launch',
-  standalone: true,
   imports: [NgOptimizedImage],
   template: `
     <section class="launch-section" aria-labelledby="launch-title">
       <div class="launch-shell">
         <div class="launch-copy">
-          <p class="launch-kicker">Launch</p>
-          <h2 id="launch-title" class="launch-title">Starting May 4, 2026.</h2>
+          <p class="launch-kicker">Cohort 1</p>
+          <h2 id="launch-title" class="launch-title">Cohort 1 — May 4, 2026.</h2>
           <p class="launch-text">
-            Hacklabs begins on <strong>May 4, 2026</strong>. This program is being launched in partnership with
+            Hacklabs Cohort 1 runs from <strong>May 4, 2026</strong>, in partnership with
             Google Developer Groups on Campus, University of Embu.
           </p>
         </div>
