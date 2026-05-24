@@ -1,12 +1,16 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.bikebuddy.mobile",
       "sha256_cert_fingerprints": [
         "1E:62:CA:3B:82:0C:8D:34:8F:CA:00:F9:ED:B2:3A:61:BA:53:DC:89:77:25:B4:08:42:13:3C:CA:29:84:43:EF",
-        "B5:BC:D3:81:BB:20:94:E6:B5:DB:B9:23:18:DF:A9:12:0C:77:FD:E7:E1:37:EE:D6:80:16:96:9D:AA:66:01:34"
+        "B5:BC:D3:81:BB:20:94:E6:B5:DB:B9:23:18:DF:A9:12:0C:77:FD:E7:E1:37:EE:D6:80:16:96:9D:AA:66:01:34",
+        "D7:13:86:F3:18:D5:36:92:F6:6E:BF:E5:85:36:16:C9:CE:CA:5F:3F:6F:FE:E2:8B:26:6D:23:C9:D6:1B:D6:64"
       ]
     }
   }
